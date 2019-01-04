@@ -1,0 +1,38 @@
+;============================================ 
+; Filename    : ssh_connect-15.ttl 
+; Description : SSH Auto login 
+; Author      : JUNZOU 
+; Created     : 2011/04/29 
+; modified    : 
+;============================================ 
+;; ユーザ名／パスワード設定 
+HOSTADDR = '153.126.179.218' 
+USERNAME = 'ken.kobayashi'
+PASSFILE = 'C:\sshkey\multiPass.dat' 
+KEY_FILE = 'C:\Users\user\Desktop\ken.kobayashi.id_rsa' 
+INI_FILE = 'C:\Users\user\Documents\teraterm-4.99\PRO_TERATERM.INI' 
+;============================================ 
+;; ①パスワード取得 
+getpassword PASSFILE USERNAME PASSWORD
+ 
+;; ②コマンド組立て 
+COMMAND = HOSTADDR 
+strconcat COMMAND ':30022 /ssh /2 /auth=publickey /user=' 
+strconcat COMMAND USERNAME 
+strconcat COMMAND ' /passwd=' 
+strconcat COMMAND PASSWORD 
+strconcat COMMAND ' /keyfile=' 
+strconcat COMMAND KEY_FILE
+strconcat COMMAND ' /F='
+strconcat COMMAND INI_FILE
+
+;; ③サーバへ接続 
+connect COMMAND
+
+wait '$' '#'
+;; ⑦文字コード変換
+sendln 'export LC_CTYPE=ja_JP.utf8' 
+wait '$' '#'
+ 
+;; ④マクロ終了 
+end
