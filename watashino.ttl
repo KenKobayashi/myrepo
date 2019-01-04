@@ -10,7 +10,7 @@ HOSTADDR = 'xxxxxx'
 USERNAME = 'xxxx'
 PASSFILE = 'C:\Users\user\multiPass.dat' 
 KEY_FILE = 'C:\Users\user\Desktop\xxxx' 
-INI_FILE = 'C:\Users\user\Documents\teraterm-4.99\PRO_TERATERM.INI' 
+INI_FILE = 'C:\Users\user\Documents\teraterm\TERATERM.INI' 
 ;============================================ 
 ;; ①パスワード取得 
 getpassword PASSFILE USERNAME PASSWORD
@@ -30,9 +30,9 @@ strconcat COMMAND INI_FILE
 connect COMMAND
 
 wait '$' '#'
-;; ⑦文字コード変換
+;; ④文字コード変換
 sendln 'export LC_CTYPE=ja_JP.utf8' 
 wait '$' '#'
  
-;; ④マクロ終了 
+;; ⑤マクロ終了 
 end
